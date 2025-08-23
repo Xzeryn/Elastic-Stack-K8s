@@ -27,37 +27,6 @@ variable "kube_config_host" {
   default       = "https://kubernetes.docker.internal:6443"
 }
 
-###################### Elastic Variables ######################
-variable "elastic_version" {
-  description   = "Elastic Version"
-  type          = string
-  default       = "9.1.2"
-}
-
-variable "elastic_cluster_namespace" {
-  description   = "Namespace for Elastic Stack Components"
-  type          = string
-  default       = "elastic"  #dashes in namespace cause fleet configurations to fail
-}
-
-variable "kubebuilder_version" {
-  description   = "Kubebuilder Version"
-  type          = string
-  default       = "v0.18.0"
-}
-
-variable "eck_operator_container_registry" {
-  description   = "Setting in the eck operator for container registry"
-  type          = string
-  default       = "docker.elastic.co"
-}
-
-variable "eck_operator_pull_policy" {
-  description   = "ECK Operator Docker image download policy"
-  type          = string
-  default       = "IfNotPresent"
-}
-
 ###################### Images ######################
 variable "eck_operator_image" {
   description   = "Docker image URL for ECK Operator"
@@ -87,6 +56,37 @@ variable "elastic_package_registry_image" {
   description   = "Docker image URL for Elastic Package Registry"
   type          = string
   default       = "docker.elastic.co/package-registry/distribution:9.1.2"
+}
+
+###################### Elastic Variables ######################
+variable "elastic_version" {
+  description   = "Elastic Version"
+  type          = string
+  default       = "9.1.2"
+}
+
+variable "elastic_cluster_namespace" {
+  description   = "Namespace for Elastic Stack Components"
+  type          = string
+  default       = "elastic"  #dashes in namespace cause fleet configurations to fail
+}
+
+variable "kubebuilder_version" {
+  description   = "Kubebuilder Version"
+  type          = string
+  default       = "v0.18.0"
+}
+
+variable "eck_operator_container_registry" {
+  description   = "Setting in the eck operator for container registry"
+  type          = string
+  default       = "docker.elastic.co"
+}
+
+variable "eck_operator_pull_policy" {
+  description   = "ECK Operator Docker image download policy"
+  type          = string
+  default       = "IfNotPresent"
 }
 
 ###################### Registry Configuration Variables ######################
@@ -206,4 +206,11 @@ variable "apm_server_ingress_hostname" {
   description   = "APM Server ingress Hostname"
   type          = string
   default       = "apm.localhost"
+}
+
+###################### K8s Variables ######################
+variable "k8s_ingress_class_name" {
+  description   = "K8s ingress class name"
+  type          = string
+  default       = "nginx"
 }

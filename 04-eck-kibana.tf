@@ -147,7 +147,7 @@ metadata:
     # nginx.ingress.kubernetes.io/ssl-redirect: "true"
     # cert-manager.io/issuer: selfsigned
 spec:
-  ingressClassName: nginx
+  ingressClassName: ${var.k8s_ingress_class_name}
   tls:
   - hosts:
     - ${var.kibana_ingress_hostname} 

@@ -33,7 +33,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-ssl-verify: "false"
     nginx.ingress.kubernetes.io/backend-protocol: "http"
 spec:
-  ingressClassName: nginx
+  ingressClassName: ${var.k8s_ingress_class_name}
   rules:
     - host: ${var.apm_server_ingress_hostname}
       http:

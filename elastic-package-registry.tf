@@ -97,7 +97,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
-  ingressClassName: nginx
+  ingressClassName: ${var.k8s_ingress_class_name}
   rules:
     - host: ${var.elastic_package_registry_ingress_hostname}
       http:

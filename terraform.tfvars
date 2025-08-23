@@ -45,3 +45,6 @@ apm_server_ingress_hostname = "apm.k8s.internal"
 
 ##### Use Case Settings #####
 air_gapped = false
+
+##### K8s Settings #####
+k8s_ingress_class_name = "nginx"
