@@ -29,11 +29,17 @@ elasticsearch_elastic_user_password = "changeme"
 elasticsearch_ingress_hostname = "es.k8s.internal"
 elasticsearch_node_count = 1 # Default is 3 for production, 1 for development
 
+# Storage class for Elasticsearch persistent volumes (only needed if volumeClaimTemplates are uncommented)
+# elasticsearch_storage_class = "standard"
+
 ##### Kibana Settings #####
 # kibana_name = "kibana-sample"
 # kibana_image = "docker.elastic.co/kibana/kibana:9.2.1"
 kibana_ingress_hostname = "kb.k8s.internal"
 kibana_node_count = 1 # Default is 2 for production, 1 for development
+
+# Storage class for Kibana persistent volumes (only needed if volumeClaimTemplates are uncommented)
+# kibana_storage_class = "standard"
 
 ##### Fleet Server Settings #####
 # fleet_server_name = "eck-fleet-server"

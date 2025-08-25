@@ -158,6 +158,12 @@ variable "elasticsearch_node_store_allow_mmap" {
   default       = false
 }
 
+variable "elasticsearch_storage_class" {
+  description   = "Storage class for Elasticsearch persistent volumes (only needed if volumeClaimTemplates are uncommented)"
+  type          = string
+  default       = "standard"
+}
+
 ###################### Kibana Variables ######################
 variable "kibana_name" {
   description   = "Name of Kibana deployment"
@@ -175,6 +181,12 @@ variable "kibana_ingress_hostname" {
   description   = "Kibana ingress Hostname"
   type          = string
   default       = "kb.localhost"
+}
+
+variable "kibana_storage_class" {
+  description   = "Storage class for Kibana persistent volumes (only needed if volumeClaimTemplates are uncommented)"
+  type          = string
+  default       = "standard"
 }
 
 ###################### Fleet Server Variables ######################

@@ -32,6 +32,7 @@ spec:
           env:
           - name: ES_JAVA_OPTS
             value: "-Xms2g -Xmx2g"
+    # Uncomment the following section if you need persistent storage for Elasticsearch
     # volumeClaimTemplates:
     # - metadata:
     #     name: elasticsearch-data # Do not change this name unless you set up a volume mount for the data path.
@@ -41,7 +42,7 @@ spec:
     #     resources:
     #       requests:
     #         storage: 2Gi
-    #     storageClassName: standard
+    #     storageClassName: ${var.elasticsearch_storage_class}
   # # inject secure settings into Elasticsearch nodes from k8s secrets references
   # secureSettings:
   # - secretName: ref-to-secret
