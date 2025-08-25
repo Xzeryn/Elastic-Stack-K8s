@@ -114,6 +114,18 @@ spec:
   # this shows how to customize the Kibana pod
   # with labels and resource limits
   podTemplate:
+  
+  # Uncomment the following section if you need persistent storage for Kibana
+  # volumeClaimTemplates:
+  # - metadata:
+  #     name: kibana-data
+  #   spec:
+  #     accessModes:
+  #     - ReadWriteOnce
+  #     resources:
+  #       requests:
+  #         storage: 1Gi
+  #     storageClassName: ${var.kibana_storage_class}
     metadata:
       labels:
         deployment: terraform
