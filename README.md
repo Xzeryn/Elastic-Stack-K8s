@@ -110,8 +110,8 @@ kube_config_host = "https://kubernetes.docker.internal:6443"
 
 ```hcl
 # In terraform.tfvars
-elastic_version = "9.1.2"
-eck_version = "3.1.0"
+elastic_version = "9.2.1"
+eck_version = "3.2.0"
 elastic_cluster_namespace = "elastic"
 elasticsearch_node_count = 1      # 3 for production
 kibana_node_count = 1            # 2 for production
@@ -468,7 +468,7 @@ elasticsearch_resources = {
 ### Remove the Stack
 
 ```bash
-terraform destroy
+terraform destroy -auto-approve
 ```
 
 ### Manual Cleanup (if needed)

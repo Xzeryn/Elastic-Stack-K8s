@@ -4,5 +4,6 @@ terraform.tfstate.backup
 *.tf-off
 *.tf-remove
 terraform.log
+terraform.tfvars
 terraform.tfvars:*
 variables.tf:*
