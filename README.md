@@ -186,7 +186,7 @@ terraform plan
 ### 5. Deploy the Stack
 
 ```bash
-terraform apply
+terraform apply -auto-approve
 ```
 
 ### 6. Verify Deployment
