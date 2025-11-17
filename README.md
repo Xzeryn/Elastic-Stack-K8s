@@ -21,11 +21,13 @@ A comprehensive Terraform-based deployment solution for the complete Elastic Sta
 ## 📋 Prerequisites
 
 ### Required Software
+
 - [Terraform](https://www.terraform.io/downloads.html) >= 1.0.0
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) >= 1.20.0
 - [Docker](https://docs.docker.com/get-docker/) (for local development and air-gapped deployments)
 
 ### Kubernetes Cluster
+
 - Kubernetes cluster version 1.20 or higher
 - Cluster with sufficient resources:
   - **Development**: 4 CPU, 8GB RAM minimum
@@ -34,6 +36,7 @@ A comprehensive Terraform-based deployment solution for the complete Elastic Sta
 - Ingress controller (optional, for external access)
 
 ### Access Requirements
+
 - `kubectl` access to the target cluster
 - Cluster admin permissions for CRD installation
 - Ability to create namespaces and RBAC resources
@@ -41,7 +44,7 @@ A comprehensive Terraform-based deployment solution for the complete Elastic Sta
 
 ## 🏗️ Architecture
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────┐
 │                    Kubernetes Cluster                           │
 ├─────────────────────────────────────────────────────────────────┤
@@ -63,7 +66,7 @@ A comprehensive Terraform-based deployment solution for the complete Elastic Sta
 
 ## 📁 Project Structure
 
-```
+```text
 Elastic-Stack-K8s/
 ├── 01-eck-crds.tf              # Custom Resource Definitions
 ├── 02-eck-operator.tf          # ECK Operator deployment
@@ -95,6 +98,7 @@ Elastic-Stack-K8s/
 The project uses Terraform variables for configuration. Key variables include:
 
 #### Provider Settings
+
 ```hcl
 # In terraform.tfvars
 kube_config_path = "~/.kube/config"
@@ -103,6 +107,7 @@ kube_config_host = "https://kubernetes.docker.internal:6443"
 ```
 
 #### Elastic Stack Configuration
+
 ```hcl
 # In terraform.tfvars
 elastic_version = "9.1.2"
@@ -113,12 +118,14 @@ kibana_node_count = 1            # 2 for production
 ```
 
 #### Security Settings
+
 ```hcl
 # In terraform.tfvars
 elasticsearch_elastic_user_password = "changeme"  # Change this!
 ```
 
 #### Ingress Configuration
+
 ```hcl
 # In terraform.tfvars
 elasticsearch_ingress_hostname = "es.k8s.internal"
@@ -130,6 +137,7 @@ apm_server_ingress_hostname = "apm.k8s.internal"
 ### Customization
 
 1. **Copy and modify variables**:
+
    ```bash
    # From project root directory
    cp terraform.tfvars.example terraform.tfvars
@@ -146,12 +154,14 @@ apm_server_ingress_hostname = "apm.k8s.internal"
 ## 🚀 Quick Start
 
 ### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/yourusername/Elastic-Stack-K8s.git
 cd Elastic-Stack-K8s
 ```
 
 ### 2. Configure Your Environment
+
 ```bash
 # From project root directory
 # Copy and customize the variables file
@@ -162,21 +172,25 @@ nano terraform.tfvars
 ```
 
 ### 3. Initialize Terraform
+
 ```bash
 terraform init
 ```
 
 ### 4. Plan the Deployment
+
 ```bash
 terraform plan
 ```
 
 ### 5. Deploy the Stack
+
 ```bash
 terraform apply
 ```
 
 ### 6. Verify Deployment
+
 ```bash
 # Check all resources
 kubectl get all -n elastic-system
@@ -210,6 +224,7 @@ chmod +x docker_pull_images.sh
 ```
 
 This script pulls the following images:
+
 - **ECK Operator**: `docker.elastic.co/eck/eck-operator:3.1.0`
 - **Elasticsearch**: `docker.elastic.co/elasticsearch/elasticsearch:9.2.1`
 - **Kibana**: `docker.elastic.co/kibana/kibana:9.2.1`
@@ -231,6 +246,7 @@ docker images | grep elastic-artifact-registry
 ```
 
 The artifact registry includes:
+
 - Pre-downloaded Elastic packages and artifacts
 - NGINX web server for serving artifacts
 - Defend artifacts for security features
@@ -276,6 +292,7 @@ kibana_storage_class = "fast-ssd"
 **To enable persistent storage:**
 
 1. **Uncomment the `volumeClaimTemplates` section in `03-eck-elasticsearch.tf`:**
+
    ```hcl
    # Change from:
    # volumeClaimTemplates:
@@ -284,6 +301,7 @@ kibana_storage_class = "fast-ssd"
    ```
 
 2. **Uncomment the `volumeClaimTemplates` section in `04-eck-kibana.tf`:**
+
    ```hcl
    # Change from:
    # volumeClaimTemplates:
@@ -300,12 +318,14 @@ kibana_storage_class = "fast-ssd"
 ## 📊 Monitoring and Management
 
 ### Access Kibana
+
 ```bash
 # Port forward to access Kibana
 kubectl port-forward -n elastic svc/kibana-sample-kb-http 5601:5601
 ```
 
 ### Check Elasticsearch Health
+
 ```bash
 # Get cluster health
 kubectl get elasticsearch -n elastic -o jsonpath='{.items[0].status.health}'
@@ -315,6 +335,7 @@ kubectl get elasticsearch -n elastic -o yaml
 ```
 
 ### View Logs
+
 ```bash
 # ECK Operator logs
 kubectl logs -n elastic-system -l control-plane=elastic-operator
@@ -328,6 +349,7 @@ kubectl logs -n elastic -l common.k8s.elastic.co/type=elasticsearch
 ### Common Issues
 
 #### StatefulSet Stuck Creating
+
 ```bash
 # Check events
 kubectl get events -n elastic-system --sort-by='.lastTimestamp'
@@ -340,6 +362,7 @@ kubectl describe resourcequota -n elastic-system
 ```
 
 #### Image Pull Errors
+
 ```bash
 # Check image pull policy
 kubectl get pods -n elastic-system -o yaml | grep imagePullPolicy
@@ -349,6 +372,7 @@ docker pull docker.elastic.co/eck/eck-operator:3.1.0
 ```
 
 #### Storage Issues
+
 ```bash
 # Check storage classes
 kubectl get storageclass
@@ -358,6 +382,7 @@ kubectl get pvc -n elastic
 ```
 
 #### Image Pull Issues (Air-Gapped Environments)
+
 ```bash
 # Check if images exist locally
 docker images | grep elastic
@@ -392,12 +417,14 @@ kubectl get crd | grep elastic
 ## 🔒 Security Considerations
 
 ### Default Security
+
 - **RBAC**: Proper role-based access control implemented
 - **Security Contexts**: Non-root containers with dropped capabilities
 - **Network Policies**: Isolated network access (configure as needed)
 - **Secrets Management**: Kubernetes secrets for sensitive data
 
 ### Security Hardening
+
 1. **Change default passwords** in `terraform.tfvars`
 2. **Enable TLS** for all communications
 3. **Configure network policies** for pod-to-pod communication
@@ -407,6 +434,7 @@ kubectl get crd | grep elastic
 ## 📈 Scaling and Performance
 
 ### Horizontal Scaling
+
 ```hcl
 # In terraform.tfvars
 elasticsearch_node_count = 5      # Scale Elasticsearch nodes
@@ -414,6 +442,7 @@ kibana_node_count = 3            # Scale Kibana instances
 ```
 
 ### Resource Optimization
+
 ```hcl
 # In terraform.tfvars
 elasticsearch_resources = {
@@ -429,6 +458,7 @@ elasticsearch_resources = {
 ```
 
 ### Storage Scaling
+
 - Configure appropriate storage classes
 - Use SSD storage for production workloads
 - Implement backup and disaster recovery
@@ -436,11 +466,13 @@ elasticsearch_resources = {
 ## 🧹 Cleanup
 
 ### Remove the Stack
+
 ```bash
 terraform destroy
 ```
 
 ### Manual Cleanup (if needed)
+
 ```bash
 # Run these commands if terraform destroy fails
 # Remove namespaces
@@ -463,6 +495,7 @@ kubectl delete crd kibanas.kibana.k8s.elastic.co
 5. Open a Pull Request
 
 ### Development Guidelines
+
 - Follow Terraform best practices
 - Add proper documentation for new features
 - Include tests where applicable
@@ -491,4 +524,4 @@ This project is provided as-is for educational and development purposes. For pro
 
 ---
 
-**Happy Elastic Stacking! 🚀**
+### Happy Elastic Stacking! 🚀

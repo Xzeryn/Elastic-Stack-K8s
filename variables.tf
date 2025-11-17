@@ -31,38 +31,38 @@ variable "kube_config_host" {
 variable "eck_operator_image" {
   description   = "Docker image URL for ECK Operator"
   type          = string
-  default       = "docker.elastic.co/eck/eck-operator:3.1.0"
+  default       = "docker.elastic.co/eck/eck-operator:3.2.0"
 }
 
 variable "elasticsearch_image" {
   description   = "Docker image URL for Elasticsearch"
   type          = string
-  default       = "docker.elastic.co/elasticsearch/elasticsearch:9.1.2"
+  default       = "docker.elastic.co/elasticsearch/elasticsearch:9.2.1"
 }
 
 variable "kibana_image" {
   description   = "Docker image URL for Kibana"
   type          = string
-  default       = "docker.elastic.co/kibana/kibana:9.1.2"
+  default       = "docker.elastic.co/kibana/kibana:9.2.1"
 }
 
 variable "elastic_agent_image" {
   description   = "Docker image URL for Elastic Agent"
   type          = string
-  default       = "docker.elastic.co/beats/elastic-agent:9.1.2"
+  default       = "docker.elastic.co/beats/elastic-agent:9.2.1"
 }
 
 variable "elastic_package_registry_image" {
   description   = "Docker image URL for Elastic Package Registry"
   type          = string
-  default       = "docker.elastic.co/package-registry/distribution:9.1.2"
+  default       = "docker.elastic.co/package-registry/distribution:9.2.1"
 }
 
 ###################### Elastic Variables ######################
 variable "elastic_version" {
   description   = "Elastic Version"
   type          = string
-  default       = "9.1.2"
+  default       = "9.2.1"
 }
 
 variable "elastic_cluster_namespace" {
