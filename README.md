@@ -4,6 +4,7 @@
 [![Terraform](https://img.shields.io/badge/Terraform-1.0+-blue.svg)](https://www.terraform.io/)
 [![Kubernetes](https://img.shields.io/badge/Kubernetes-1.20+-326CE5.svg?logo=kubernetes)](https://kubernetes.io/)
 [![ECK](https://img.shields.io/badge/ECK-3.2.0-orange.svg)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
+[![Elastic](https://img.shields.io/badge/Elastic-9.2.1-orange.svg)](https://www.elastic.co/docs/release-notes)
 
 A comprehensive Terraform-based deployment solution for the complete Elastic Stack on Kubernetes using the Elastic Cloud on Kubernetes (ECK) operator. This project provides infrastructure-as-code for deploying Elasticsearch, Kibana, APM Server, Fleet Server, and Elastic Agent in a Kubernetes environment.
 
